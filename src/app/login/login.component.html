@@ -1,0 +1,28 @@
+<div class="container">
+  <form class="example-form" [formGroup]="loginForm" (ngSubmit)="onFormSubmit(loginForm.value)">
+      <h2>Please login using your credentials</h2>
+      <mat-form-field class="example-full-width">
+        <mat-label>Email</mat-label>
+        <input matInput placeholder="Enter your email" formControlName="email"
+                [errorStateMatcher]="matcher">
+        <mat-error>
+          <span *ngIf="!loginForm.get('email').valid && loginForm.get('email').touched">Please enter your email</span>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <mat-label>Password</mat-label>
+        <input matInput  type="password" placeholder="Enter your password" formControlName="password"
+                [errorStateMatcher]="matcher">
+        <mat-error>
+          <span *ngIf="!loginForm.get('password').valid && loginForm.get('password').touched">Please enter your password</span>
+        </mat-error>
+      </mat-form-field>
+      <a href="javascript:void(0)" [disabled]="!loginForm.get('email').valid" (click)="onResetPassword(loginForm.value)">Forgot Password?</a>
+
+      <div class="button-row">
+          <button type="submit" [disabled]="!loginForm.valid" mat-fab color="primary"><mat-icon>login</mat-icon></button>
+      </div>
+  </form>
+
+
+</div>
