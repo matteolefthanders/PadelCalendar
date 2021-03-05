@@ -12,6 +12,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { MatTableModule } from '@angular/material/table';
@@ -19,8 +20,10 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSortModule } from '@angular/material/sort';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatSelectModule } from '@angular/material/select';
 import { DatePipe } from '@angular/common';
 import { HomeComponent } from './home/home.component';
+import { HeaderComponent } from './navigation/header/header.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +32,8 @@ import { HomeComponent } from './home/home.component';
     GamelistComponent,
     CreategameComponent,
     AddtogameComponent,
-    HomeComponent
+    HomeComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
@@ -40,11 +44,13 @@ import { HomeComponent } from './home/home.component';
     MatInputModule,
     MatIconModule,
     MatCardModule,
+    MatToolbarModule,
     MatFormFieldModule,
     MatTableModule,
     MatProgressSpinnerModule,
     MatSortModule,
     MatSnackBarModule,
+    MatSelectModule,
     MatSidenavModule
   ],
   providers: [DatePipe],
