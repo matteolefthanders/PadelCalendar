@@ -1,7 +1,6 @@
 <div class="container">
   <form *ngIf="showForm" class="example-form" [formGroup]="createGameForm" (ngSubmit)="onFormSubmit(createGameForm.value)" >
       <h2>Crea nuova partita</h2>
-      <div >
 		<mat-form-field class="example-full-width">
 		    <mat-label>Campo</mat-label>
 		    <input matInput  formControlName="place"
@@ -10,9 +9,7 @@
 		      <span *ngIf="!createGameForm.get('place').valid && createGameForm.get('place').touched">Il posto è richiesto</span>
 		    </mat-error>
 		</mat-form-field>
-	</div>
-      <div >
-		<mat-form-field>
+		<mat-form-field class="example-full-width">
 			 <mat-label>Data</mat-label>
     		<input matInput type="datetime-local" formControlName="date"
 		            [errorStateMatcher]="matcher">
@@ -20,9 +17,7 @@
 		      <span *ngIf="!createGameForm.get('date').valid && createGameForm.get('date').touched">La data è richiesta</span>
 		    </mat-error>
   		</mat-form-field>
-  	</div>
-      <div >
-		<mat-form-field>
+		<mat-form-field class="example-full-width">
 		<mat-label>Stato</mat-label>
 		  <mat-select formControlName="state" [errorStateMatcher]="matcher">
 		    <mat-option *ngFor="let state of states" [value]="state">
@@ -30,7 +25,26 @@
 		    </mat-option>
 		  </mat-select>
 		</mat-form-field>
-		</div>
+		<mat-form-field class="example-full-width">
+		    <mat-label>G1</mat-label>
+		    <input matInput  formControlName="player1"
+		            [errorStateMatcher]="matcher">
+		</mat-form-field>
+		<mat-form-field class="example-full-width">
+		    <mat-label>G2</mat-label>
+		    <input matInput  formControlName="player2"
+		            [errorStateMatcher]="matcher">
+		</mat-form-field>
+		<mat-form-field class="example-full-width">
+		    <mat-label>G3</mat-label>
+		    <input matInput  formControlName="player3"
+		            [errorStateMatcher]="matcher">
+		</mat-form-field>
+		<mat-form-field class="example-full-width">
+		    <mat-label>G4</mat-label>
+		    <input matInput  formControlName="player4"
+		            [errorStateMatcher]="matcher">
+		</mat-form-field>
       <div class="button-row">
           <button type="submit" [disabled]="!createGameForm.valid" mat-fab color="primary"><mat-icon>create</mat-icon></button>
       </div>

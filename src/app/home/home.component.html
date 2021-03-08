@@ -1,7 +1,6 @@
 <div class="container">
   <form *ngIf="showForm" class="example-form" [formGroup]="personalForm" (ngSubmit)="onFormSubmit(personalForm.value)" >
       <h2>Informazioni personali</h2>
-      <div class="button-row">
 
 		<mat-form-field class="example-full-width">
 		    <mat-label>Nome</mat-label>
@@ -31,6 +30,15 @@
 		</mat-form-field>
 
 		<mat-form-field class="example-full-width">
+		    <mat-label>Email</mat-label>
+		    <input matInput  formControlName="email"
+		            [errorStateMatcher]="matcher">
+		    <mat-error>
+		      <span *ngIf="!personalForm.get('email').valid && personalForm.get('email').touched">Please enter your email</span>
+		    </mat-error>
+		</mat-form-field>
+
+		<mat-form-field class="example-full-width">
 		    <mat-label>Livello</mat-label>
 		    <md-input-container>
 			    <input
@@ -55,6 +63,7 @@
 		  </mat-select>
 		</mat-form-field>
 
+      <div class="button-row">
 
           <button type="submit" [disabled]="!personalForm.valid" mat-fab color="primary"><mat-icon>save</mat-icon></button>
       </div>

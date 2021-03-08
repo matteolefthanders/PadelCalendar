@@ -24,6 +24,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { DatePipe } from '@angular/common';
 import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './navigation/header/header.component';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { HeaderComponent } from './navigation/header/header.component';
     MatSortModule,
     MatSnackBarModule,
     MatSelectModule,
+    MatButtonToggleModule,
     MatSidenavModule
   ],
   providers: [DatePipe],

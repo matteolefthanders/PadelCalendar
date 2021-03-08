@@ -8,8 +8,8 @@ import {AddtogameComponent} from './addtogame/addtogame.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
-  { path: 'home/:uid', component: HomeComponent },
-  { path: 'gamelist/:email', component: GamelistComponent },
+  { path: 'home', component: HomeComponent },
+  { path: 'gamelist', component: GamelistComponent },
   { path: 'creategame', component: CreategameComponent },
   { path: 'addtogame/:email/:gameid', component: AddtogameComponent },
   { path: '',

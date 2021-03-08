@@ -6,10 +6,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./gamelist.component.css']
 })
 export class GamelistComponent implements OnInit {
+  selectable: boolean = true;
 
+  filters = [
+    { name: 'Mie' },
+    { name: 'Aperte' },
+    { name: 'Chiuse' }
+  ];
+
+  selectedFilters: any[] = [];
   constructor() { }
 
   ngOnInit(): void {
   }
+
+ 
 
 }
