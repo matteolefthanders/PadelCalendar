@@ -1,5 +1,21 @@
+<div class="container">
 <mat-button-toggle-group name="filters" aria-label="Filters">
   <mat-button-toggle value="mine">Mie</mat-button-toggle>
   <mat-button-toggle value="open">Aperte</mat-button-toggle>
   <mat-button-toggle value="closed">Chiuse</mat-button-toggle>
 </mat-button-toggle-group>
+<mat-card *ngFor="let game of games">
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image"></div>
+    <mat-card-title>{{game.date.split("T")[0]}}</mat-card-title>
+    <mat-card-subtitle>{{game.date.split("T")[1]}}</mat-card-subtitle>
+  </mat-card-header>
+  <img mat-card-image src="assets/images/field_{{game.state}}.png" width="4">
+  <mat-card-content>
+    <p></p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button *ngIf="game.state == 'open'" mat-button>JOIN</button>
+  </mat-card-actions>
+</mat-card>
+</div>
