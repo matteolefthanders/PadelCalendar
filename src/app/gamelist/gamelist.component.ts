@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { GamesService } from  '../games/games.service';
 
 @Component({
   selector: 'app-gamelist',
@@ -10,23 +11,12 @@ export class GamelistComponent implements OnInit {
   selectedFilters: any[] = [];
   games: any[] = [];
 
-  constructor() {
+  constructor(private gameService: GamesService) {
 
-    this.games = [{
-      date: "2021-03-08T20:10",
-      place: "Padel Tivoli Terme",
-      player1: "keKxPSe1gfRyCF4680kq3gLDDJi1",
-      state: "open"
-    },{
-      date: "2021-03-10T22:00",
-      place: "Borghesiana",
-      player1: "keKxPSe1gfRyCF4680kq3gLDDJi1",
-      player2: "",
-      player3: "",
-      player4: "",
-      state: "closed"
-    }]
-
+    console.log("Calling GetGames")
+  
+    this.games = this.gameService.getGames(); 
+    console.log(this.games)
   }
 
   ngOnInit(): void {
