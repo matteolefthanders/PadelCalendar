@@ -23,6 +23,8 @@ export class InfoService {
 			} else {
 				returnString = obj.email.trim().toLowerCase();
 			}
+			if(obj.level)
+				returnString = `${returnString} (${obj.level})`;
 		}
 	});
 

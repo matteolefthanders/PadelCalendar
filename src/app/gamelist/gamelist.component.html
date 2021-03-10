@@ -1,21 +1,35 @@
 <div class="container">
-<mat-button-toggle-group name="filters" aria-label="Filters">
-  <mat-button-toggle value="mine">Mie</mat-button-toggle>
-  <mat-button-toggle value="open">Aperte</mat-button-toggle>
-  <mat-button-toggle value="all">All</mat-button-toggle>
+<mat-button-toggle-group class="example-form" name="filters" aria-label="Filters">
+  <mat-button-toggle class="example-btn" (click)="onMineSelected()" value="mine">Mie</mat-button-toggle>
+  <mat-button-toggle class="example-btn" (click)="onOpenSelected()" value="open">Aperte</mat-button-toggle>
+  <mat-button-toggle class="example-btn" (click)="onAllSelected()" value="all">Tutte</mat-button-toggle>
 </mat-button-toggle-group>
-<mat-card *ngFor="let game of games">
+<mat-card class="example-form" *ngFor="let game of games">
   <mat-card-header>
     <div mat-card-avatar class="example-header-image"></div>
-    <mat-card-title>{{game.date.split("T")[0]}}</mat-card-title>
+    <mat-card-title>{{game.date.split("T")[0]}}             {{game.place}}</mat-card-title>
     <mat-card-subtitle>{{game.date.split("T")[1]}}</mat-card-subtitle>
   </mat-card-header>
   <img mat-card-image src="assets/images/field_{{game.state}}.png" width="4">
   <mat-card-content>
+    <p>{{game.player1}} {{game.player2}}</p>
+    <p>{{game.player3}} {{game.player4}}</p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button *ngIf="game.join" mat-button>Partecipa</button>
+  </mat-card-actions>
+</mat-card>
+<mat-card class="example-form" *ngIf="games.length == 0">
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image"></div>
+    <mat-card-title>NO GAME FOUND</mat-card-title>
+    <mat-card-subtitle></mat-card-subtitle>
+  </mat-card-header>
+  <img mat-card-image src="assets/images/field_not_found.png" width="4">
+  <mat-card-content>
     <p></p>
   </mat-card-content>
   <mat-card-actions>
-    <button *ngIf="game.state == 'open'" mat-button>JOIN</button>
   </mat-card-actions>
 </mat-card>
 </div>
