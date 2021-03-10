@@ -27,8 +27,27 @@ export class InfoService {
 				returnString = `${returnString} (${obj.level})`;
 		}
 	});
-
 	return returnString;
+  }
 
+  getEquipo(){
+  	var equipo = [];
+  	this.userRef.on("value", snap=>{
+		snap.forEach(x=>{
+			if(x.val()){
+				var obj = {
+					email: x.val().email,
+					level:  x.val().level,
+					name:  x.val().name,
+					nickname:  x.val().nickname,
+					position:  x.val().position,
+					surname:  x.val().surname,
+					id: x.key
+				}
+				equipo.push(obj);
+			}
+		})
+	});
+	return equipo;
   }
 }

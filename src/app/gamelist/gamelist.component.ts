@@ -12,10 +12,10 @@ export class GamelistComponent implements OnInit {
   games: any[] = [];
 
   constructor(private gameService: GamesService) {  
-    this.games = this.gameService.getGames(); 
   }
 
   ngOnInit(): void {
+        this.games = this.gameService.getGames(); 
   }
 
   onMineSelected(){

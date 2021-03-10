@@ -60,7 +60,15 @@ export class HomeComponent implements OnInit {
   		var loggedUser = this.authService.getUserLoggedIn();
 			var updateRef = this.ref.child(`${loggedUser.uid}`);
 			console.log(personalInfo);
-  		updateRef.update(personalInfo);
+  		updateRef.update(personalInfo, (err)=>{
+        if(err){
+          console.log("Home: onFormSubmit: err");
+          console.log(err)
+        } else {
+          alert("Le modifiche sono state salvate!");   
+        }
+      });
+      
   	}
   }
 }

@@ -25,6 +25,7 @@ import { DatePipe } from '@angular/common';
 import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './navigation/header/header.component';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import { EquipoComponent } from './equipo/equipo.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
     CreategameComponent,
     AddtogameComponent,
     HomeComponent,
-    HeaderComponent
+    HeaderComponent,
+    EquipoComponent
   ],
   imports: [
     BrowserModule,
