@@ -18,7 +18,7 @@ export class CreategameComponent implements OnInit {
   ref = firebase.database().ref('Games/');
   showForm = false;
   matcher: ErrorStateMatcher
-  states: any[] = ["open","close"];
+  states: any[] = ["open","closed"];
   players: any[] = [];
 
  
