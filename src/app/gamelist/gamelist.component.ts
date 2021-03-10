@@ -33,5 +33,10 @@ export class GamelistComponent implements OnInit {
     this.games = this.gameService.getGames(); 
   }
 
+  partecipate(obj){
+    console.log("partecipate: called")
+    console.log(obj)
+    this.gameService.partecipateGame(obj);
+  }
 
 }

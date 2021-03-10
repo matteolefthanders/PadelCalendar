@@ -31,6 +31,18 @@ export class FiltersService {
   	return result;
   }
 
+  getFirstFreePosition(gameObj){
+  	var resultString = null;
+  	if(!gameObj.hasOwnProperty("player2")){
+  		resultString = "player2";
+  	} else if(!gameObj.hasOwnProperty("player3")){
+  		resultString = "player3";
+  	} else if(!gameObj.hasOwnProperty("player4")){
+  		resultString = "player4";
+  	}
+  	return resultString;
+  }
+
    
 
 }

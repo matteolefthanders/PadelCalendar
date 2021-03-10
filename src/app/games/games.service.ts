@@ -20,6 +20,30 @@ export class GamesService {
   }
 
   
+  partecipateGame(gameObj){
+	if(this.authService.isLoggedIn){
+  		var loggedUser = this.authService.getUserLoggedIn();
+  		var that = this;
+		this.ref.child(gameObj.id).on("value", function(snapshot) {
+		    if(snapshot.val()){
+		    	if(!that.filtersService.amIAlreadyPartecipateGame(snapshot.val(), loggedUser.uid)){
+		    		var updateRef = that.ref.child(gameObj.id);
+		    		var playerPosition = that.filtersService.getFirstFreePosition(snapshot.val());
+		    		console.log(playerPosition);
+		    		if(playerPosition){
+		    			var updateObj = {}
+		    			if(playerPosition=="player4"){
+		    				updateObj["state"]="closed"
+		    			} 
+		    			updateObj[playerPosition]=loggedUser.uid;
+    			  		updateRef.update(updateObj);
+		    		}
+		    	}
+		    }
+		});
+  	}
+
+  }
 
   getMyGames(){
 	var gameResult = [];

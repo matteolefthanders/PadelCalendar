@@ -16,7 +16,7 @@
     <p>{{game.player3}} {{game.player4}}</p>
   </mat-card-content>
   <mat-card-actions>
-    <button *ngIf="game.join" mat-button>Partecipa</button>
+    <button *ngIf="game.join" (click)="partecipate(game)" mat-button>Partecipa</button>
   </mat-card-actions>
 </mat-card>
 <mat-card class="example-form" *ngIf="games.length == 0">
