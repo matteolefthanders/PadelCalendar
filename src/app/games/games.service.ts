@@ -23,7 +23,16 @@ export class GamesService {
         this.getGames();
   }
 
-  
+	compare(a, b) {
+	  if (a.date < b.date) {
+	    return -1;
+	  }
+	  if (a.date > b.date) {
+	    return 1;
+	  }
+	  return 0;
+	}
+	  
   partecipateGame(gameObj){
 	if(this.authService.isLoggedIn){
   		var loggedUser = this.authService.getUserLoggedIn();
@@ -76,7 +85,7 @@ export class GamesService {
   		
   	}
 
-    this.dataStore.games = gameResult;
+    this.dataStore.games = gameResult.sort(this.compare);
     this._games.next(Object.assign({}, this.dataStore).games);
   }
 
@@ -107,7 +116,7 @@ export class GamesService {
   		
   	}
 
-    this.dataStore.games = gameResult;
+    this.dataStore.games = gameResult.sort(this.compare);
     this._games.next(Object.assign({}, this.dataStore).games);
   }
 
@@ -138,7 +147,7 @@ export class GamesService {
   		
   	}
 
-    this.dataStore.games = gameResult;
+    this.dataStore.games = gameResult.sort(this.compare);
     this._games.next(Object.assign({}, this.dataStore).games);
   }
 }
