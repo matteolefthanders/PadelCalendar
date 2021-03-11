@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { InfoService } from  '../info/info.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-equipo',
@@ -8,12 +9,15 @@ import { InfoService } from  '../info/info.service';
 })
 export class EquipoComponent implements OnInit {
   displayedColumns: string[] = ['name', 'surname', 'nickname', 'position', 'level'];
-  equipo: any[] = [];
+  equipo: Observable<any[]>;
 
-  constructor(private infoService: InfoService) { }
+  constructor(public infoService: InfoService) { 
+  	this.equipo = this.infoService.equipo;
+  	this.infoService.getEquipo();
+  }
 
   ngOnInit(): void {
-  	this.equipo = this.infoService.getEquipo();
+  	this.infoService.getEquipo();
   }
 
 }

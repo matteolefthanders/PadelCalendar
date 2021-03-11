@@ -1,14 +1,22 @@
 import { Injectable } from '@angular/core';
 import { Router } from  "@angular/router";
 import firebase from 'firebase';
+import { Observable, BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class InfoService {
   userRef = firebase.database().ref('Info/');
+  private _equipo = new BehaviorSubject<any[]>([]);
+  public readonly equipo = this._equipo.asObservable();
+  private dataStore: { equipo: any[] } = { equipo: [] };
 
-  constructor(private router: Router) {}
+
+
+  constructor(private router: Router) {
+  	this.getEquipo();
+  }
 
   public getPlayerFromId(uid){
   	var returnString = "";
@@ -48,6 +56,6 @@ export class InfoService {
 			}
 		})
 	});
-	return equipo;
-  }
+	this.dataStore.equipo = equipo;
+    this._equipo.next(Object.assign({}, this.dataStore).equipo);  }
 }

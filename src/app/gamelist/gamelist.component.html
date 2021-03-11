@@ -4,7 +4,7 @@
   <mat-button-toggle class="example-btn" (click)="onOpenSelected()" value="open">Aperte</mat-button-toggle>
   <mat-button-toggle class="example-btn" (click)="onAllSelected()" value="all">Tutte</mat-button-toggle>
 </mat-button-toggle-group>
-<mat-card class="example-form" *ngFor="let game of games">
+<mat-card class="example-form" *ngFor="let game of gameStore.games | async">
   <mat-card-header>
     <div mat-card-avatar class="example-header-image"></div>
     <mat-card-title>{{game.date.split("T")[0]}}             {{game.place}}</mat-card-title>
@@ -19,7 +19,7 @@
     <button *ngIf="game.join" (click)="partecipate(game)" mat-button>Partecipa</button>
   </mat-card-actions>
 </mat-card>
-<mat-card class="example-form" *ngIf="games.length == 0">
+<mat-card class="example-form" *ngIf="(gameStore.games | async)?.length==0">
   <mat-card-header>
     <div mat-card-avatar class="example-header-image"></div>
     <mat-card-title>NO GAME FOUND</mat-card-title>

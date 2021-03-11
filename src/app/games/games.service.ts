@@ -5,6 +5,7 @@ import { AuthService } from  '../auth/auth.service';
 import { InfoService } from  '../info/info.service';
 import { FiltersService } from  '../utilities/filters.service';
 FiltersService
+import { Observable, BehaviorSubject } from 'rxjs';
 
 @Injectable({
     providedIn:  'root'
@@ -13,10 +14,13 @@ FiltersService
 export class GamesService {
 
   ref = firebase.database().ref('Games/');
+  private _games = new BehaviorSubject<any[]>([]);
+  public readonly games = this._games.asObservable();
+  private dataStore: { games: any[] } = { games: [] };
 
 
   constructor(private filtersService: FiltersService, private  authService:  AuthService, private  infoService:  InfoService, private router: Router) {
-
+        this.getGames();
   }
 
   
@@ -72,7 +76,8 @@ export class GamesService {
   		
   	}
 
-  	return gameResult;
+    this.dataStore.games = gameResult;
+    this._games.next(Object.assign({}, this.dataStore).games);
   }
 
   getOpenGames(){
@@ -93,7 +98,7 @@ export class GamesService {
 					gameObj['player2'] = (childSnapshot.val().hasOwnProperty("player2"))?that.infoService.getPlayerFromId(childSnapshot.val().player2):"";
 					gameObj['player3'] = (childSnapshot.val().hasOwnProperty("player3"))?that.infoService.getPlayerFromId(childSnapshot.val().player3):"";
 					gameObj['player4'] = (childSnapshot.val().hasOwnProperty("player4"))?that.infoService.getPlayerFromId(childSnapshot.val().player4):"";
-		      		gameObj['join'] = !that.filtersService.amIAlreadyPartecipateGame(childSnapshot.val(), loggedUser.uid);
+		      		gameObj['join'] = !(that.filtersService.amIAlreadyPartecipateGame(childSnapshot.val(), loggedUser.uid)||childSnapshot.val().state=="closed");
 		      		gameResult.push(gameObj);
 	      		}
 			});
@@ -102,12 +107,12 @@ export class GamesService {
   		
   	}
 
-  	return gameResult;
+    this.dataStore.games = gameResult;
+    this._games.next(Object.assign({}, this.dataStore).games);
   }
 
   getGames(){
 	var gameResult = [];
-
   	if(this.authService.isLoggedIn){
   		var loggedUser = this.authService.getUserLoggedIn();
   		var that = this;
@@ -124,7 +129,7 @@ export class GamesService {
 					gameObj['player2'] = (childSnapshot.val().hasOwnProperty("player2"))?that.infoService.getPlayerFromId(childSnapshot.val().player2):"";
 					gameObj['player3'] = (childSnapshot.val().hasOwnProperty("player3"))?that.infoService.getPlayerFromId(childSnapshot.val().player3):"";
 					gameObj['player4'] = (childSnapshot.val().hasOwnProperty("player4"))?that.infoService.getPlayerFromId(childSnapshot.val().player4):"";
-		      		gameObj['join'] = !that.filtersService.amIAlreadyPartecipateGame(childSnapshot.val(), loggedUser.uid);
+		      		gameObj['join'] = !(that.filtersService.amIAlreadyPartecipateGame(childSnapshot.val(), loggedUser.uid)||childSnapshot.val().state=="closed");
 		      		gameResult.push(gameObj);
 	      		}
 			});
@@ -133,7 +138,7 @@ export class GamesService {
   		
   	}
 
-  	return gameResult;
-
+    this.dataStore.games = gameResult;
+    this._games.next(Object.assign({}, this.dataStore).games);
   }
 }

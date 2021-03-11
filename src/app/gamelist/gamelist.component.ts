@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GamesService } from  '../games/games.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-gamelist',
@@ -9,34 +10,37 @@ import { GamesService } from  '../games/games.service';
 export class GamelistComponent implements OnInit {
 
   selectedFilters: any[] = [];
-  games: any[] = [];
-
-  constructor(private gameService: GamesService) {  
+  games: Observable<any[]>;
+ 
+  constructor(public gameStore: GamesService) {  
   }
 
   ngOnInit(): void {
-        this.games = this.gameService.getGames(); 
+        //this.games = this.gameService.getGames(); 
+      this.games = this.gameStore.games;
+      this.gameStore.getGames();
   }
-
+  
   onMineSelected(){
     console.log("onMineSelected: called")
-    this.games = this.gameService.getMyGames();
+    this.gameStore.getMyGames();
   }
   
   onOpenSelected(){
     console.log("onOpenSelected: called")
-    this.games = this.gameService.getOpenGames();
+    this.gameStore.getOpenGames();
   }
   
   onAllSelected(){
     console.log("onAllSelected: called")
-    this.games = this.gameService.getGames(); 
+    this.gameStore.getGames(); 
   }
 
   partecipate(obj){
     console.log("partecipate: called")
     console.log(obj)
-    this.gameService.partecipateGame(obj);
+    this.gameStore.partecipateGame(obj);
+    this.gameStore.getMyGames();
   }
 
 }
