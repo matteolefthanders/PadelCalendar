@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { GamelistComponent } from './gamelist/gamelist.component';
 import { CreategameComponent } from './creategame/creategame.component';
-import { AddtogameComponent } from './addtogame/addtogame.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -33,7 +32,6 @@ import { EquipoComponent } from './equipo/equipo.component';
     LoginComponent,
     GamelistComponent,
     CreategameComponent,
-    AddtogameComponent,
     HomeComponent,
     HeaderComponent,
     EquipoComponent
