@@ -12,7 +12,7 @@ import { Observable, BehaviorSubject } from 'rxjs';
 })
 
 export class GamesService {
-
+  private dateOptions = { 'weekday': 'long', 'month': '2-digit', 'day': '2-digit', 'hour': '2-digit','minute': '2-digit',};
   ref = firebase.database().ref('Games/');
   private _games = new BehaviorSubject<any[]>([]);
   public readonly games = this._games.asObservable();
@@ -69,7 +69,7 @@ export class GamesService {
 		    	if(that.filtersService.isValidDateGame(childSnapshot.val()) && that.filtersService.amIAlreadyPartecipateGame(childSnapshot.val(), loggedUser.uid)){
 					var gameObj = {};
 					gameObj['id'] = childSnapshot.key;
-					gameObj['date'] = childSnapshot.val().date;
+					gameObj['date'] = new Date(childSnapshot.val().date).toLocaleString('it-IT', that.dateOptions);
 					gameObj['place'] = childSnapshot.val().place;
 					gameObj['state'] = childSnapshot.val().state;
 					gameObj['player1'] = that.infoService.getPlayerFromId(childSnapshot.val().player1);
@@ -100,7 +100,7 @@ export class GamesService {
 		    	if(that.filtersService.isValidDateGame(childSnapshot.val()) && childSnapshot.val().state=='open'){
 					var gameObj = {};
 					gameObj['id'] = childSnapshot.key;
-					gameObj['date'] = childSnapshot.val().date;
+					gameObj['date'] = new Date(childSnapshot.val().date).toLocaleString('it-IT', that.dateOptions);
 					gameObj['place'] = childSnapshot.val().place;
 					gameObj['state'] = childSnapshot.val().state;
 					gameObj['player1'] = that.infoService.getPlayerFromId(childSnapshot.val().player1);
@@ -131,7 +131,7 @@ export class GamesService {
 		    	if(that.filtersService.isValidDateGame(childSnapshot.val())){
 					var gameObj = {};
 					gameObj['id'] = childSnapshot.key;
-					gameObj['date'] = childSnapshot.val().date;
+					gameObj['date'] = new Date(childSnapshot.val().date).toLocaleString('it-IT', that.dateOptions);
 					gameObj['place'] = childSnapshot.val().place;
 					gameObj['state'] = childSnapshot.val().state;
 					gameObj['player1'] = that.infoService.getPlayerFromId(childSnapshot.val().player1);
